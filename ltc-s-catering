@@ -1,0 +1,5 @@
+#!/bin/sh
+printf "141:\t"
+curl -s "https://lilly.aramarkcafe.com/LocationsAndMenus/GardenSouthCafeBuilding141?locationId=7705&periodId=2008" | ./parse-aramark
+printf "145:\t"
+curl -s "https://lilly.aramarkcafe.com/LocationsAndMenus/MarketplaceCafeBuilding145?locationId=7707&periodId=2008" | ./parse-aramark
