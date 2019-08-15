@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+import sys
+from bs4 import BeautifulSoup
+from colored import fg, bg, attr
+
+colors = {
+    "Yen Ching": 197,
+    "Cancun": 215,
+    "Pita Place": 46,
+    "Parthanon": 11,
+    "Squealers BBQ": 170,
+    "Main Street Poke Bowl": 45,
+    "New India": 95,
+    "Punch Burger": 130,
+}
+
+soup = BeautifulSoup(sys.stdin, 'html.parser')
+headings = soup.find_all('h2')
+
+def pretty(s):
+    if s in colors:
+        return fg(colors[s]) + s + attr(0)
+    return s
+
+for h in headings:
+    if h.get_text().strip() == "Guest Restaurant":
+        elems = h.parent.find_all('li')
+        restaurants = [pretty(e.get_text().strip()) for e in elems]
+        print("\t".join(restaurants))
+        break
+else:
+    print("Could not fetch restaurants.")
