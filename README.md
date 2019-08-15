@@ -1,8 +1,10 @@
 # LTC-S Catering
 
-Want to know what's on the menu today at LTC South? Use this script to find out.
+Find out what catering is available today at LTC South.
 
 ![screenshot](./screenshot.png)
+
+Caches output for eight hours. Add it to your shell profile to get a daily preview of the menu on startup.
 
 ## Usage
 

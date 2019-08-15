@@ -1,5 +1,12 @@
 #!/bin/sh
-printf "141:\t"
-curl -s "https://lilly.aramarkcafe.com/LocationsAndMenus/GardenSouthCafeBuilding141?locationId=7705&periodId=2008" | ./parse-aramark
-printf "145:\t"
-curl -s "https://lilly.aramarkcafe.com/LocationsAndMenus/MarketplaceCafeBuilding145?locationId=7707&periodId=2008" | ./parse-aramark
+cache_file='food-today.txt'
+cached_output="$(find "$cache_file" -mtime -8h 2>/dev/null)"
+
+if [ ! "$cached_output" ] ; then
+  printf "141:\t" > "$cache_file"
+  curl -s "https://lilly.aramarkcafe.com/LocationsAndMenus/GardenSouthCafeBuilding141?locationId=7705&periodId=2008" | ./parse-aramark >> "$cache_file"
+  printf "145:\t" >> "$cache_file"
+  curl -s "https://lilly.aramarkcafe.com/LocationsAndMenus/MarketplaceCafeBuilding145?locationId=7707&periodId=2008" | ./parse-aramark >> "$cache_file"
+fi
+
+cat "$cache_file"
